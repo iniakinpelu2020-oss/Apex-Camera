@@ -1,1 +1,94 @@
-(placeholder)
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e13">
+<meta name="description" content="Apex Camera - photo and video capture that stays on this device and lands in Apex Gallery.">
+<title>Apex Camera</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body data-mode="photo">
+<div class="glow" aria-hidden="true"></div>
+
+<header class="bar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="word">Apex<b>Camera</b></span>
+  </div>
+  <div class="bar-right">
+    <span class="chip" id="lensChip">Starting camera&hellip;</span>
+    <span class="chip is-soft" id="resChip" hidden>&mdash;</span>
+  </div>
+</header>
+
+<main class="stage">
+  <section class="finder" id="finder" aria-label="Camera preview">
+    <video id="viewfinder" class="video" playsinline autoplay muted></video>
+
+    <div class="finder-top">
+      <span class="tag is-rec" id="timerTag" hidden>
+        <span class="dot" aria-hidden="true"></span>
+        <span id="timerText">00:00</span>
+      </span>
+      <span class="tag is-soft" id="modeTag">Photo</span>
+    </div>
+
+    <p class="hint" id="finderHint">Point, then press the shutter.</p>
+
+    <div class="fallback" id="fallback" hidden>
+      <div class="fallback-card">
+        <h2 id="fallbackTitle">Camera unavailable</h2>
+        <p id="fallbackBody">The camera did not start.</p>
+        <button class="btn primary" id="retryBtn" type="button">Retry Camera</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="modes" role="group" aria-label="Capture mode">
+      <button class="mode is-on" id="photoMode" type="button" aria-pressed="true">Photo</button>
+      <button class="mode" id="videoMode" type="button" aria-pressed="false">Video</button>
+    </div>
+
+    <div class="shutter-row">
+      <span class="spacer" aria-hidden="true"></span>
+      <button class="shutter" id="shutter" type="button" aria-label="Take photo" disabled>
+        <span class="shutter-core" aria-hidden="true"></span>
+      </button>
+      <button class="round" id="switchBtn" type="button" aria-label="Switch camera" title="Switch camera" disabled>
+        <span aria-hidden="true">&#8646;</span>
+      </button>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <span id="libStamp">Checking Apex Gallery&hellip;</span>
+  <span>Nothing leaves this device</span>
+</footer>
+
+<div class="review" id="review" hidden>
+  <div class="review-card" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <h2 id="reviewTitle">Photo captured</h2>
+    <div class="review-media">
+      <img id="reviewImg" alt="Captured photo" hidden>
+      <video id="reviewVideo" playsinline controls hidden></video>
+    </div>
+    <p class="review-meta" id="reviewMeta"></p>
+    <div class="review-actions">
+      <button class="btn primary" id="reviewDownload" type="button">Download</button>
+      <button class="btn" id="reviewClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="snapshot" hidden></canvas>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="./app.js"></script>
+</body>
+</html>
